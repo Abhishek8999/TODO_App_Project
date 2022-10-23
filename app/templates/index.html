@@ -1,0 +1,116 @@
+{% extends 'base.html'%}
+
+{% block content %}
+<div>
+  <div class="container pt-4">
+    <div class="row p-0 mt-2">
+      <div class="col-lg-4 mx-auto shadow p-0">
+        <div class="alert alert-info">
+            <h2>Add New TODO</h2>
+        </div>
+          <div class="p-4" id="todoformlength">
+            <form action="/add-todo/" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <hr>
+                <input type="submit" value="ADD" class="btn btn-info">
+            </form>
+          </div>
+      </div>
+
+        
+
+      <div class="col">
+        <div class="border">
+          
+          {% if todos|length == 0 %}
+
+            <div class="alert alert-info text-center">
+              <p class="" style="font-size: 20px;">No Todos</p>
+            </div>
+
+          {% else %}
+          <div class="outer-wrapper" id="maxTableHeight">
+            <table class="table" id="tblGrid">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Title</th>
+                  <th>Detailes</th>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                
+                  {% for todo in todos %}
+                  <tr class=tr_{{todo.status}}>
+                    <td>{{forloop.counter}}</td>
+                    <td>{{todo.title}}</td>
+                    <td>{{todo.details}}</td>
+                    <td>{{todo.date_from}}</td>
+                    <td>{{todo.date_to}}</td>
+                    <td>{{todo.status}}</td>
+                    <td>
+                      <a href="/delete-todo/{{todo.id}}" title="Delete" class="btn btn-danger" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Delete</a>
+                      <!--
+                      {% if todo.status == 'Pending' %}
+                      <a href="/change-status/{{todo.id}}/Completed" title="Completed" class="">✔️</a>
+                      {% else %}
+                      <a href="/change-status/{{todo.id}}/Pending" title="Pending" class="">🕝</a>
+                      {% endif %}
+                      -->
+                      <a href="/update-data/{{todo.id}}" title="Edit" class="btn btn-warning" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">Edit</a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                
+              </tbody>
+            </table>
+          </div>
+          {% endif %}
+
+        </div>
+      </div>
+    </div>
+  </div> 
+</div>
+
+<div class="below-buttons">
+  <input type="button" id="btnShowHide" value="Pending"/>
+  <input type="button" id="btnShowAll" value="Show All"/>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<script type="text/javascript">
+  $(function(){
+
+    //Button for Show all items
+$("#btnShowAll").click(function(){
+  $('#tblGrid tbody').find('tr').show();
+});
+
+//Button click for show hide items based on filter status
+$("#btnShowHide").click(function(){
+  debugger;
+ if( $("#btnShowHide").val()=='Pending'){
+    $('#tblGrid tbody').find('tr.tr_Completed').hide();
+    $('#tblGrid tbody').find('tr.tr_Pending').show();
+    $("#btnShowHide").val('Completed');
+  }
+  else if( $("#btnShowHide").val()=='Completed'){
+    $('#tblGrid tbody').find('tr.tr_Pending').hide();
+    $('#tblGrid tbody').find('tr.tr_Completed').show();
+    $("#btnShowHide").val('Pending');
+  }
+});
+        
+    });
+
+</script>
+{% endblock %}
+

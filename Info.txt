@@ -1,0 +1,17 @@
+Database Connection : MySQL
+===============================================
+
+******** Users ******************
+Admin User : admin
+pass : admin 
+
+another user : abhishek
+pass : admin@123
+
+===============================================
+
+Technologies Used:
+1. Python
+2. HTML
+3. CSS
+4. JavaScript

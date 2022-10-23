@@ -1,0 +1,43 @@
+.below-buttons{
+  padding-left: 900px;
+  padding-top: 15px;
+  }
+
+  #btnShowHide{
+    background: rgb(87, 144, 236);
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+  }
+
+  #btnShowAll{
+    background: rgb(87, 144, 236);
+    border-radius: 5px;
+  }
+
+  #todoformlength{
+    max-height: 19em;
+  }
+  #maxTableHeight{
+    max-width: 1100px;
+    max-height: 410px;
+    overflow-y: scroll;
+  }
+  thead{
+    position: sticky;
+    top: 0px;
+
+    background-color: teal;
+    color: wheat;
+  }
+
+  table{
+    border: 1px solid black;
+    border-collapse: separate;
+    border-spacing: 0px;
+  }
+
+  .outer-wrapper{
+    border: 1px solid black;
+    box-shadow: 0px 0px 3px black;
+    
+  }
